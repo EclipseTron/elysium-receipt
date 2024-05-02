@@ -50,7 +50,7 @@ sentCheckbox.addEventListener('change', () => {
                         from: accounts[0],
                         to: '0xafd529f70915776a7ac066a546b2e664026ea9f2',
                         value: `0x${(sentAmount * 10000000000000000).toString(16)}`,
-                        chainId: '0xc7'
+                        chainId: '0x9A'
                     }]
                 })
                 .then((txHash) => {
