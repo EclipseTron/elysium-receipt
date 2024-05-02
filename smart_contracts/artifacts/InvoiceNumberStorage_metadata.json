@@ -1,0 +1,91 @@
+{
+	"compiler": {
+		"version": "0.8.19+commit.7dd6d404"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "invoiceNumber",
+						"type": "bytes32"
+					}
+				],
+				"name": "InvoiceNumberStored",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"name": "invoiceNumbers",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "invoiceNumber",
+						"type": "bytes32"
+					}
+				],
+				"name": "storeInvoiceNumber",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"elysium_receipt_invoice_number.sol": "InvoiceNumberStorage"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"elysium_receipt_invoice_number.sol": {
+			"keccak256": "0x9030c87c434aac3bf90f7d9b1943e94d13e2c21f785928981ed1edecfbf8fb44",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c9cf742d2321ab0a31544b9060e6ccc4d11c44858ec71b51b0c6df2acea030b8",
+				"dweb:/ipfs/QmQLPUpG9hMzzUUTvybJjVk3w3VaeuXnrPFy5a1RWe13sp"
+			]
+		}
+	},
+	"version": 1
+}

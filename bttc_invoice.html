@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ElysiumReceipt BTTC Invoice</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <link rel="stylesheet" href="css/body.css" />
+    <link rel="stylesheet" href="css/pdf.css" />
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center mt-50 mb-50">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="invoice">
+                    <div class="card-header bg-transparent header-elements-inline">
+                        <h6 class="card-title text-primary">ElysiumReceipt: BTTC transaction</h6>
+                        <div class="col-sm-6">
+                            <div class="mb-4 ">
+                                <div class="text-sm-right">
+                                    <h4 class="invoice-color mb-2 mt-md-2">Invoice #<span id="invoice-number"></span></h4>
+                                    <ul class="list list-unstyled mb-0">
+                                        <li>Transaction Date: <span id="transaction-date" class="font-weight-semibold"></span></li>
+                                        <li>Invoice date: <span class="font-weight-semibold" id="invoice-date"></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="d-md-flex justify-content-between">
+                            <div class="text-left mb-4">
+                                <span class="text-muted">Invoice From:</span>
+                                <ul class="list list-unstyled mb-0">
+                                    <li>
+                                        <input type="text" class="form-control" id="user-name" placeholder="Sender's Name">
+                                    </li>
+                                    <li>
+                                        <input type="text" class="form-control" id="user-address" placeholder="Wallet Address" readonly>
+                                    </li>
+                                    <li>
+                                        <input type="email" class="form-control" id="user-email" placeholder="Email">
+                                    </li>
+                                    <li>
+                                        <input type="tel" class="form-control" id="user-phone-number" placeholder="Phone">
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="text-left mb-4">
+                                <span class="text-muted">Invoice To:</span>
+                                <ul class="list list-unstyled mb-0">
+                                    <li>
+                                        <input type="text" class="form-control" id="receiver-name" placeholder="Receiver's Name">
+                                    </li>
+                                    <li>
+                                        <input type="text" class="form-control" id="receiver-address" placeholder="Wallet Address" readonly>
+                                    </li>
+                                    <li>
+                                        <input type="email" class="form-control" id="receiver-email" placeholder="Email">
+                                    </li>
+                                    <li>
+                                        <input type="tel" class="form-control" id="receiver-phone-number" placeholder="Phone">
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    <th>Work Details</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="text" class="form-control" id="work-type" placeholder="Work Type">
+                                        <input type="text" class="form-control" id="work-description" placeholder="Work Description">
+                                    </td>
+                                    <td><span class="font-weight-semibold">
+                                            <li><span id="transaction-value" class="font-weight-semibold"></span></li>
+                                        </span></td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Transaction Details</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div id="transactionList"></div>
+                    <div class="card-body">
+                        <div class="d-md-flex flex-md-wrap">
+
+                        </div>
+                    </div>
+                    <div class="card-footer"> <span class="text-muted">All data displayed was created by ElysiumReceipt in line with the information provided and approved by the user. For more information: sklev2023@outlook.com</span> </div>
+                </div>
+                <div class="container border mt-3 bg-light">
+                    <label for="addressInput">Enter Metamask address:</label>
+                    <input type="text" id="addressInput">
+                    <button onclick="getTransactions()">Show Txn Hashes</button>
+                    <div class="row">
+                        <div class="col-md-6 border-left py-3">
+                            <div class="form-group">
+                                <label for="name">BTTC Address of User</label>
+                                <input type="text" class="form-control" id="name" placeholder="Connect Metamask Wallet" disabled />
+                            </div>
+
+
+                            <di v class="container">
+                                <div class="bottom-buttons">
+                                    <form id="sent-form">
+                                        <div class="sent">
+                                            <input type="checkbox" id="invoice-payment">
+                                            <label for="invoice-payment">I understand and accept the Terms & Conditions</label>
+                                        </div>
+
+                                        <div class="sent">
+                                            <input type="checkbox" id="confirm-data" disabled>
+                                            <label for="confirm-data">Checking via BTTC APIs & Smart Contract (Storage)</label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-12 text-right mb-3">
+                                    <button class="btn btn-primary btn btn-success" id="download" onclick="sendMail()"> download Invoice</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="balanceDisplay" hidden></div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.3.5/dist/web3.min.js"></script>
+    <script>
+        const web3 = new Web3(Web3.givenProvider);
+
+        //Smart Contract-1 Integration
+        const contractABI1 = [[{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"invoiceId","type":"bytes32"},{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":true,"internalType":"address","name":"receiver","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"InvoiceCreated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"invoiceId","type":"bytes32"}],"name":"InvoicePaid","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"invoiceId","type":"bytes32"},{"indexed":false,"internalType":"bool","name":"paid","type":"bool"}],"name":"InvoiceStatusUpdated","type":"event"},{"inputs":[{"internalType":"bytes32","name":"invoiceId","type":"bytes32"}],"name":"checkPaymentStatus","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"invoiceId","type":"bytes32"},{"internalType":"address","name":"receiver","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"createInvoice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"invoiceId","type":"bytes32"}],"name":"getInvoiceStatus","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"invoices","outputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"receiver","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"bool","name":"paid","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"invoiceId","type":"bytes32"}],"name":"payInvoice","outputs":[],"stateMutability":"payable","type":"function"}]];
+        const contractAddress1 = '0x987a8c785C9D5ee7960663e71DcD381fC648a03f';
+        const contractInstance1 = new web3.eth.Contract(contractABI1, contractAddress1);
+        async function fetchInvoiceDetails1() {
+            const invoiceId = await contractInstance1.methods.checkPaymentStatus().call();
+        }
+        fetchInvoiceDetails1();
+
+        //Smart Contract-2 Integration
+        const contractABI2 = [[{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"invoiceNumber","type":"bytes32"}],"name":"InvoiceNumberStored","type":"event"},{"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"invoiceNumbers","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"invoiceNumber","type":"bytes32"}],"name":"storeInvoiceNumber","outputs":[],"stateMutability":"nonpayable","type":"function"}]];
+        const contractAddress2 = '0xB91B291AFa5F5724cFcF1Cd80c2FAB54EACb3A09';
+        const contractInstance2 = new web3.eth.Contract(contractABI2, contractAddress2);
+        async function fetchInvoiceDetails2() {
+            const invoiceNumber = await contractInstance2.methods.invoiceNumbers().call();
+            document.getElementById('invoice-number').textContent = invoiceNumber;
+        }
+        fetchInvoiceDetails2();
+
+    </script>
+    <script src="javascript/pdf.js"></script>
+    <script src="javascript/update_data.js"></script>
+    <script src="javascript/balance.js"></script>
+    <script src="javascript/update_form.js"></script>
+    <script src="javascript/transaction.js"></script>
+</body>
+
+</html>
