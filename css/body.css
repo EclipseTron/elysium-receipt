@@ -83,3 +83,18 @@ a {
     color: #fff;
     background-color: darkgreen;
 }
+
+@media (max-width: 767px) {
+    .mobile-list {
+        max-width: 300px;
+        overflow-x: auto;
+    }
+
+    #transactionList {
+        white-space: nowrap;
+    }
+
+    .card-body {
+        margin-bottom: 15px;
+    }
+}
