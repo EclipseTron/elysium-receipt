@@ -31,7 +31,7 @@ sentCheckbox.addEventListener('change', () => {
                 .then(data => {
                     if (data.status === '1') {
                         const currentBalance = parseFloat(data.result) / 1e18;
-                        if (currentBalance >= initialBalance + 1) {
+                        if (currentBalance >= initialBalance + 90.01) {
                             clearInterval(intervalId);
                             conditionCheckbox.disabled = false;
                         }

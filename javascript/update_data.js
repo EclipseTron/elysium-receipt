@@ -41,7 +41,7 @@ if (typeof window.ethereum !== 'undefined') {
 
 sentCheckbox.addEventListener('change', () => {
     if (sentCheckbox.checked) {
-        const sentAmount = 100;
+        const sentAmount = 10000;
         if (typeof window.ethereum !== 'undefined') {
             ethereum
                 .request({
